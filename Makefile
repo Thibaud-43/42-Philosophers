@@ -1,6 +1,6 @@
-SRCS			= srcs/philo_one/main.c srcs/philo_one/guetters.c srcs/philo_one/guetters2.c srcs/philo_two/main.c srcs/philo_three/main.c
+SRCS			= srcs/philo_one/main.c srcs/philo_one/guetters.c srcs/philo_one/guetters2.c srcs/philo_two/main.c srcs/philo_three/main.c srcs/philo_one/philosophers.c
 
-OBJS_ONE	= srcs/philo_one/main.o  srcs/philo_one/guetters.o srcs/philo_one/guetters2.o
+OBJS_ONE	= srcs/philo_one/main.o  srcs/philo_one/guetters.o srcs/philo_one/guetters2.o srcs/philo_one/philosophers.o
 
 OBJS_TWO	= srcs/philo_two/main.o
 
@@ -8,7 +8,7 @@ OBJS_THREE	= srcs/philo_three/main.o
 
 INC			=  -I inc/
 
-CC			= clang
+CC			= gcc -pthread
 
 RM			= rm -f
 

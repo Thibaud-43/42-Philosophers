@@ -64,7 +64,6 @@ void	print_inputs(s_inputs *in)
 	printf("number_of_philosophers: %u \n", in->number_of_philosophers);
 	printf("number_of_forks: %u \n", in->number_of_forks);
 	printf("number_of_steps: %u \n", in->number_of_steps );
-
 }
 
 int 	main(int argc, char **argv)
@@ -75,8 +74,9 @@ int 	main(int argc, char **argv)
 	if (parse_inputs(argc, argv) == false || get_inputs(argc, argv, &in) == false)
 	{
 		printf("Error in arguments.\n");
-		return (1);
+		return (SUCCESS);
 	}
-	print_inputs(&in);
-	return (1);
+	//print_inputs(&in);
+	create_philosophers(&in);
+	return (SUCCESS);
 }

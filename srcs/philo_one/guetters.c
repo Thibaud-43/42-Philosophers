@@ -2,8 +2,8 @@
 
 bool	get_number_of_philosophers_and_forks(char **argv, s_inputs *in)
 {
-	u_int64_t	nb;
-	u_int32_t	i;
+	uint64_t	nb;
+	uint32_t	i;
 
 	nb = 0;
 	i = 0;
@@ -14,15 +14,15 @@ bool	get_number_of_philosophers_and_forks(char **argv, s_inputs *in)
 			return (false);
 		i++;
 	}
-	in->number_of_philosophers = (u_int32_t)nb;
-	in->number_of_forks = (u_int32_t)nb;
+	in->number_of_philosophers = (uint32_t)nb;
+	in->number_of_forks = (uint32_t)nb;
 	return (true);
 }
 
 bool	get_time_to_die(char **argv, s_inputs *in)
 {
-	u_int64_t	nb;
-	u_int32_t	i;
+	uint64_t	nb;
+	uint32_t	i;
 
 	nb = 0;
 	i = 0;
@@ -33,14 +33,14 @@ bool	get_time_to_die(char **argv, s_inputs *in)
 			return (false);
 		i++;
 	}
-	in->time_to_die = (u_int32_t)nb;
+	in->time_to_die = (uint32_t)nb;
 	return (true);
 }
 
 bool	get_time_to_eat(char **argv, s_inputs *in)
 {
-	u_int32_t	nb;
-	u_int32_t	i;
+	uint32_t	nb;
+	uint32_t	i;
 
 	nb = 0;
 	i = 0;
@@ -51,14 +51,14 @@ bool	get_time_to_eat(char **argv, s_inputs *in)
 			return (false);
 		i++;
 	}
-	in->time_to_eat = (u_int32_t)nb;
+	in->time_to_eat = (uint32_t)nb;
 	return (true);
 }
 
 bool	get_time_to_sleep(char **argv, s_inputs *in)
 {
-	u_int64_t	nb;
-	u_int32_t	i;
+	uint64_t	nb;
+	uint32_t	i;
 
 	nb = 0;
 	i = 0;
@@ -69,7 +69,7 @@ bool	get_time_to_sleep(char **argv, s_inputs *in)
 			return (false);
 		i++;
 	}
-	in->time_to_sleep = (u_int32_t)nb;
+	in->time_to_sleep = (uint32_t)nb;
 	return (true);
 }
 

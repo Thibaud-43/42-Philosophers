@@ -2,8 +2,8 @@
 
 bool	get_number_of_steps(char **argv, s_inputs *in)
 {
-	u_int64_t	nb;
-	u_int32_t	i;
+	uint64_t	nb;
+	uint32_t	i;
 
 	nb = 0;
 	i = 0;
@@ -14,6 +14,6 @@ bool	get_number_of_steps(char **argv, s_inputs *in)
 			return (false);
 		i++;
 	}
-	in->number_of_steps = (u_int32_t)nb;
+	in->number_of_steps = (uint32_t)nb;
 	return (true);
 }
