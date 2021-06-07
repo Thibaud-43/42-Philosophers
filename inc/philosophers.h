@@ -21,6 +21,7 @@
 #define PTHREAD_ERROR	2
 #define TIME			struct timeval
 #define MUTEX			pthread_mutex_t
+#define DEBUG			write(1, "ok\n", 3);
 
 /*
 ** STRUCTURES
@@ -28,13 +29,13 @@
 
 typedef		struct 	t_inputs
 {
-	useconds_t		time_to_die;
-	useconds_t		time_to_sleep;
-	useconds_t		time_to_eat;
-	useconds_t		max_time_to_think;
+	uint64_t		time_to_die;
+	uint64_t		time_to_sleep;
+	uint64_t		time_to_eat;
+	uint64_t		max_time_to_think;
 	uint32_t		number_of_philosophers;
 	uint32_t		number_of_forks;
-	uint32_t		number_of_steps;
+	int32_t			number_of_steps;
 }					s_inputs;
 
 typedef		struct 	t_philosopher
@@ -42,8 +43,8 @@ typedef		struct 	t_philosopher
 	uint32_t		name;
 	pthread_t		thread;
 	bool			*someone_died;
-	TIME			time_zero;
-	TIME			time_last_meal;
+	uint64_t		time_zero;
+	uint64_t		time_last_meal;
 	s_inputs		in;
 	uint32_t		nb_eat;
 	MUTEX			*fork_left;

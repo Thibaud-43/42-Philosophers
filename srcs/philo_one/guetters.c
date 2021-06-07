@@ -33,13 +33,13 @@ bool	get_time_to_die(char **argv, s_inputs *in)
 			return (false);
 		i++;
 	}
-	in->time_to_die = (uint32_t)nb;
+	in->time_to_die = nb;
 	return (true);
 }
 
 bool	get_time_to_eat(char **argv, s_inputs *in)
 {
-	uint32_t	nb;
+	uint64_t	nb;
 	uint32_t	i;
 
 	nb = 0;
@@ -51,7 +51,7 @@ bool	get_time_to_eat(char **argv, s_inputs *in)
 			return (false);
 		i++;
 	}
-	in->time_to_eat = (uint32_t)nb;
+	in->time_to_eat = nb;
 	return (true);
 }
 
@@ -69,7 +69,7 @@ bool	get_time_to_sleep(char **argv, s_inputs *in)
 			return (false);
 		i++;
 	}
-	in->time_to_sleep = (uint32_t)nb;
+	in->time_to_sleep = nb;
 	return (true);
 }
 
