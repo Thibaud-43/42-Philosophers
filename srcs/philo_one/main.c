@@ -9,6 +9,7 @@ void	init_inputs(s_inputs *in)
 	in->number_of_philosophers = 0;
 	in->number_of_forks = 0;
 	in->number_of_steps = -1;
+	pthread_mutex_init(&in->use_terminal, NULL);
 }
 
 bool	only_numbers(char *str)
@@ -57,10 +58,10 @@ bool	get_inputs(int argc, char **argv, s_inputs *in)
 }
 void	print_inputs(s_inputs *in)
 {
-	printf("time_to_die: %u \n", in->time_to_die);
-	printf("time_to_sleep: %u \n", in->time_to_sleep);
-	printf("time_to_eat: %u \n", in->time_to_eat);
-	printf("max_time_to_think: %u \n", in->max_time_to_think);
+	printf("time_to_die: %lu \n", in->time_to_die);
+	printf("time_to_sleep: %lu \n", in->time_to_sleep);
+	printf("time_to_eat: %lu \n", in->time_to_eat);
+	printf("max_time_to_think: %lu \n", in->max_time_to_think);
 	printf("number_of_philosophers: %u \n", in->number_of_philosophers);
 	printf("number_of_forks: %u \n", in->number_of_forks);
 	printf("number_of_steps: %u \n", in->number_of_steps );

@@ -1,6 +1,6 @@
-SRCS			= srcs/philo_one/main.c srcs/philo_one/guetters.c srcs/philo_one/guetters2.c srcs/philo_two/main.c srcs/philo_three/main.c srcs/philo_one/philosophers.c
+SRCS			= srcs/philo_one/main.c srcs/philo_one/guetters.c srcs/philo_one/guetters2.c srcs/philo_two/main.c srcs/philo_three/main.c srcs/philo_one/philosophers.c srcs/philo_one/routine.c srcs/philo_one/utils.c
 
-OBJS_ONE	= srcs/philo_one/main.o  srcs/philo_one/guetters.o srcs/philo_one/guetters2.o srcs/philo_one/philosophers.o
+OBJS_ONE	= srcs/philo_one/main.o  srcs/philo_one/guetters.o srcs/philo_one/guetters2.o srcs/philo_one/philosophers.o srcs/philo_one/routine.o srcs/philo_one/utils.o
 
 OBJS_TWO	= srcs/philo_two/main.o
 
