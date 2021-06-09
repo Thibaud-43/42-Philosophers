@@ -52,19 +52,12 @@ bool	print(t_philosopher *philo, enum e_mode type)
 void	wait_until_death(t_philosopher *philo, enum e_mode type)
 {
 	uint64_t	time;
-	uint64_t	steps;
 
 	if (type == EAT)
-	{	
-		time = philo->in.time_to_eat * 1000;
-	}
+		time = philo->in.time_to_eat;
 	else if (type == SLEEP)
-		time = philo->in.time_to_sleep * 1000;
-	steps = (time / WAIT_FREQUENCY);
-	while (steps && *(philo->someone_died) == false)
-	{
-		usleep(WAIT_FREQUENCY);
-		steps--;
-	}
-	usleep(time % WAIT_FREQUENCY);
+		time = philo->in.time_to_sleep;
+	if (*philo->someone_died == false)
+		ft_sleep(time);
+	return ;
 }

@@ -1,9 +1,9 @@
 #include <philosophers.h>
 
-void	ft_sleep(uint32_t ms)
+void	ft_sleep(uint64_t ms)
 {
-	uint32_t	curr;
-	uint32_t	end;
+	uint64_t	curr;
+	uint64_t	end;
 
 	curr = get_time();
 	end = curr + ms;
@@ -33,7 +33,7 @@ bool	is_dead(t_philosopher *philo)
 	return (false);
 }
 
-bool	check_meals(t_philosopher *philo)
+bool	check_eat(t_philosopher *philo)
 {
 	uint32_t	i;
 
@@ -68,7 +68,7 @@ void	monitoring(t_inputs *in, t_philosopher *philo)
 		ft_sleep(8);
 		check_death(philo);
 		if (*philo->someone_died == false && in->number_of_steps > 0
-			&& check_meals(philo))
+			&& check_eat(philo))
 		{
 			*philo->someone_died = true;
 			ft_sleep(5);
