@@ -4,16 +4,17 @@ bool	routine_forkmanagement_and_eat(t_philosopher *philo)
 {
 	pthread_mutex_lock(philo->fork_left);
 	if (print(philo, FORK))
-		return (TRUE);
+		return (true);
 	pthread_mutex_lock(philo->fork_right);
 	if (print(philo, FORK))
-		return (TRUE);
+		return (true);
 	if (print(philo, EAT))
-		return (TRUE);
+		return (true);
 	wait_until_death(philo, EAT);
+	philo->nb_eat++;
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
-	return (FALSE);
+	return (false);
 }
 
 void	*routine(void *arg)
@@ -23,13 +24,10 @@ void	*routine(void *arg)
 	philo = (t_philosopher *)arg;
 	if (philo->name % 2 != 0)
 		usleep(1000);
-	while (*(philo->someone_died) == false
-		&& philo->nb_eat != philo->in.number_of_steps)
+	while (*(philo->someone_died) == false)
 	{
 		if (routine_forkmanagement_and_eat(philo))
 			break ;
-		if (philo->in.number_of_steps != -1)
-			philo->nb_eat++;
 		if (philo->in.number_of_steps == philo->nb_eat)
 		{
 			print(philo, END);

@@ -73,6 +73,7 @@ int	create_philosophers2(t_inputs *in, t_philosopher *philo)
 			return (PTHREAD_ERROR);
 		i++;
 	}
+	monitoring(in, philo);
 	i = 0;
 	while (i < in->number_of_philosophers)
 	{
@@ -99,6 +100,6 @@ int	create_philosophers(t_inputs *in)
 	if (create_philosophers2(in, philo) == PTHREAD_ERROR)
 		return (PTHREAD_ERROR);
 	free(philo);
-	free(forks);
+	destroy_mutex(forks, in);
 	return (SUCCESS);
 }
