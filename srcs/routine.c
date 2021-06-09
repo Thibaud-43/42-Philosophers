@@ -29,10 +29,7 @@ void	*routine(void *arg)
 		if (routine_forkmanagement_and_eat(philo))
 			break ;
 		if (philo->in.number_of_steps == philo->nb_eat)
-		{
-			print(philo, END);
 			break ;
-		}
 		if (print(philo, SLEEP))
 			break ;
 		wait_until_death(philo, SLEEP);
