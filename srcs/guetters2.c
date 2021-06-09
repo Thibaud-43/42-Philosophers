@@ -1,9 +1,9 @@
 #include <philosophers.h>
 
-bool	get_number_of_steps(char **argv, s_inputs *in)
+bool	get_number_of_steps(char **argv, t_inputs *in)
 {
 	uint64_t	nb;
-	int32_t	i;
+	int32_t		i;
 
 	nb = 0;
 	i = 0;

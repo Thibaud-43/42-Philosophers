@@ -1,6 +1,6 @@
 #include <philosophers.h>
 
-void	init_inputs(s_inputs *in)
+void	init_inputs(t_inputs *in)
 {
 	in->time_to_die = 0;
 	in->time_to_sleep = 0;
@@ -42,42 +42,37 @@ bool	parse_inputs(int argc, char **argv)
 	return (true);
 }
 
-bool	get_inputs(int argc, char **argv, s_inputs *in)
+bool	get_inputs(int argc, char **argv, t_inputs *in)
 {
-	bool ret;
+	bool	ret;
 
 	ret = true;
 	ret = get_number_of_philosophers_and_forks(argv, in);
 	ret = get_time_to_die(argv, in);
 	ret = get_time_to_eat(argv, in);
 	ret = get_time_to_sleep(argv, in);
-	ret = get_max_time_to_think(argv, in);
-	if (argc == 6)	
+	ret = get_max_time_to_think(in);
+	if (argc == 6)
 		ret = get_number_of_steps(argv, in);
+	if (in->number_of_philosophers < 2 || in->number_of_philosophers > 200
+		|| in->time_to_die < 60
+		|| in->time_to_eat < 60 || in->time_to_sleep < 60
+		|| (in->number_of_steps != -1 && in->number_of_steps < 0))
+		ret = false;
 	return (ret);
-}
-void	print_inputs(s_inputs *in)
-{
-	printf("time_to_die: %lu \n", in->time_to_die);
-	printf("time_to_sleep: %lu \n", in->time_to_sleep);
-	printf("time_to_eat: %lu \n", in->time_to_eat);
-	printf("max_time_to_think: %lu \n", in->max_time_to_think);
-	printf("number_of_philosophers: %u \n", in->number_of_philosophers);
-	printf("number_of_forks: %u \n", in->number_of_forks);
-	printf("number_of_steps: %u \n", in->number_of_steps );
 }
 
 int 	main(int argc, char **argv)
 {
-	s_inputs	in;
+	t_inputs	in;
 
 	init_inputs(&in);
-	if (parse_inputs(argc, argv) == false || get_inputs(argc, argv, &in) == false)
+	if (parse_inputs(argc, argv) == false
+		|| get_inputs(argc, argv, &in) == false)
 	{
 		printf("Error in arguments.\n");
 		return (SUCCESS);
 	}
-	//print_inputs(&in);
 	create_philosophers(&in);
 	return (SUCCESS);
 }

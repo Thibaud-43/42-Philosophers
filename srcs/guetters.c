@@ -1,6 +1,6 @@
 #include <philosophers.h>
 
-bool	get_number_of_philosophers_and_forks(char **argv, s_inputs *in)
+bool	get_number_of_philosophers_and_forks(char **argv, t_inputs *in)
 {
 	uint64_t	nb;
 	uint32_t	i;
@@ -19,7 +19,7 @@ bool	get_number_of_philosophers_and_forks(char **argv, s_inputs *in)
 	return (true);
 }
 
-bool	get_time_to_die(char **argv, s_inputs *in)
+bool	get_time_to_die(char **argv, t_inputs *in)
 {
 	uint64_t	nb;
 	uint32_t	i;
@@ -37,7 +37,7 @@ bool	get_time_to_die(char **argv, s_inputs *in)
 	return (true);
 }
 
-bool	get_time_to_eat(char **argv, s_inputs *in)
+bool	get_time_to_eat(char **argv, t_inputs *in)
 {
 	uint64_t	nb;
 	uint32_t	i;
@@ -55,7 +55,7 @@ bool	get_time_to_eat(char **argv, s_inputs *in)
 	return (true);
 }
 
-bool	get_time_to_sleep(char **argv, s_inputs *in)
+bool	get_time_to_sleep(char **argv, t_inputs *in)
 {
 	uint64_t	nb;
 	uint32_t	i;
@@ -73,8 +73,9 @@ bool	get_time_to_sleep(char **argv, s_inputs *in)
 	return (true);
 }
 
-bool	get_max_time_to_think(char **argv, s_inputs *in)
+bool	get_max_time_to_think(t_inputs *in)
 {
-	in->max_time_to_think = in->time_to_die - in->time_to_sleep - in->time_to_eat;
+	in->max_time_to_think = in->time_to_die
+		- in->time_to_sleep - in->time_to_eat;
 	return (true);
 }

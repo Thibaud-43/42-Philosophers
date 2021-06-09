@@ -1,32 +1,24 @@
-SRCS			= srcs/philo_one/main.c srcs/philo_one/guetters.c srcs/philo_one/guetters2.c srcs/philo_two/main.c srcs/philo_three/main.c srcs/philo_one/philosophers.c srcs/philo_one/routine.c srcs/philo_one/utils.c
+SRCS			= srcs/main.c srcs/guetters.c srcs/guetters2.c srcs/philosophers.c srcs/routine.c srcs/utils.c
+OBJS			= $(SRCS:.c=.o)
 
-OBJS_ONE	= srcs/philo_one/main.o  srcs/philo_one/guetters.o srcs/philo_one/guetters2.o srcs/philo_one/philosophers.o srcs/philo_one/routine.o srcs/philo_one/utils.o
+CC				= gcc -pthread
+RM				= rm -f
+CFLAGS			= -Wall -Wextra -Werror -I inc/
+LIBS			=  -lpthread
 
-OBJS_TWO	= srcs/philo_two/main.o
+NAME			= philo_one
 
-OBJS_THREE	= srcs/philo_three/main.o
+all:			$(NAME)
 
-INC			=  -I inc/
+$(NAME):		$(OBJS)
+				gcc ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS}
 
-CC			= gcc -pthread
-
-RM			= rm -f
-
-.c.o:
-			$(CC) -c $< -o $(<:.c=.o) $(INC)
-
-all:			one two three
-
-one :			$(OBJS_ONE)
-				$(CC) $(INC) $(OBJS_ONE) -o philo_one
-two :			$(OBJS_TWO)
-				$(CC) $(INC) $(OBJS_TWO) -o philo_two
-three :			$(OBJS_THREE)
-				$(CC) $(INC) $(OBJS_THREE) -o philo_three
 clean:
-				$(RM) $(OBJS_ONE) $(OBJS_TWO) $(OBJS_THREE)
-fclean:			clean
-				$(RM) philo_one philo_two philo_three
-re:				fclean all
+				$(RM) $(OBJS) $(BONUS_OBJS)
 
-.PHONY:			all clean fclean re bonus
+fclean:			clean
+				$(RM) $(NAME)
+
+re:				fclean $(NAME)
+
+.PHONY:			all clean fclean re
