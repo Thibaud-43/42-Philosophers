@@ -77,7 +77,8 @@ void		*routine(void *arg);
 uint64_t	get_time(void);
 bool		print(t_philosopher *philo, enum e_mode type);
 void		wait_until_death(t_philosopher *philo, enum e_mode type);
-void		destroy_mutex(pthread_mutex_t *forks, t_inputs *in);
+void		destroy_mutex(pthread_mutex_t *forks, t_inputs *in, t_philosopher *philo);
 void		monitoring(t_inputs *in, t_philosopher *philo);
-void		ft_sleep(uint64_t ms);
+void		print3(uint64_t time, uint32_t name, char *str);
+void		ft_sleep(uint64_t ms, t_philosopher *philo);
 #endif

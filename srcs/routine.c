@@ -36,6 +36,5 @@ void	*routine(void *arg)
 		if (print(philo, THINK))
 			break ;
 	}
-	pthread_mutex_destroy(&(philo->eat));
 	return (NULL);
 }

@@ -56,6 +56,7 @@ int	init_philosophers(uint64_t time_zero, bool *someone_died,
 		(*philo)[i].time_zero = time_zero;
 		(*philo)[i].time_last_meal = time_zero;
 		(*philo)[i].nb_eat = 0;
+		pthread_mutex_init(&((*philo)[i].eat), NULL);
 		i++;
 	}
 	return (SUCCESS);
@@ -99,7 +100,7 @@ int	create_philosophers(t_inputs *in)
 		return (MALLOC_ERROR);
 	if (create_philosophers2(in, philo) == PTHREAD_ERROR)
 		return (PTHREAD_ERROR);
+	destroy_mutex(forks, in, philo);
 	free(philo);
-	destroy_mutex(forks, in);
 	return (SUCCESS);
 }
