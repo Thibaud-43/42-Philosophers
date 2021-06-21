@@ -75,7 +75,7 @@ int 	main(int argc, char **argv)
 		|| get_inputs(argc, argv, &in) == false)
 	{
 		if (in.number_of_philosophers < 2)
-			printf("%llu ms 0 is died\n", in.time_to_die);
+			printf("%lu ms 0 is died\n", in.time_to_die);
 		else
 			printf("Error in arguments.\n");
 		return (SUCCESS);
