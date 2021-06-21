@@ -8,7 +8,7 @@ char	*ft_itoa(uint64_t num)
 
 	count = ft_count_size(num);
 	i = 0;
-	if (num < 0 || count == 0)
+	if (count == 0)
 		count++;
 	dst = malloc(sizeof(char) * (count + 1));
 	if (!(dst))
