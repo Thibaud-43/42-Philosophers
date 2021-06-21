@@ -81,4 +81,10 @@ void		destroy_mutex(pthread_mutex_t *forks, t_inputs *in, t_philosopher *philo);
 void		monitoring(t_inputs *in, t_philosopher *philo);
 void		print3(uint64_t time, uint32_t name, char *str);
 void		ft_sleep(uint64_t ms, t_philosopher *philo);
+void		unlock_forks(pthread_mutex_t *forks, unsigned int nb_philos);
+int			ft_strlen(char *str);
+int	ft_count_size(int n);
+
+
+
 #endif

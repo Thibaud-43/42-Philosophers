@@ -1,87 +1,30 @@
 #include <philosophers.h>
 
-uint64_t	get_time(void)
-{
-	static struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * (uint64_t)1000) + (tv.tv_usec / 1000));
-}
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
-static int	ft_count_size(int n)
-{
-	int i;
-
-	i = 0;
-	if (n < 0)
-		n *= -1;
-	while (n != 0)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i);
-}
-
-char		*ft_itoa(uint64_t num)
+char	*ft_itoa(uint64_t num)
 {
 	char				*dst;
 	uint64_t			count;
 	uint64_t			i;
-	__uint128_t			n;
 
-	n = num;
-	count = ft_count_size(n);
+	count = ft_count_size(num);
 	i = 0;
-	if (n < 0 || count == 0)
+	if (num < 0 || count == 0)
 		count++;
-	if (!(dst = malloc(sizeof(char) * (count + 1))))
+	dst = malloc(sizeof(char) * (count + 1));
+	if (!(dst))
 		return (NULL);
-	if (n < 0)
+	if (num < 0)
 	{
-		n *= -1;
+		num *= -1;
 		dst[0] = '-';
 		i++;
 	}
 	dst[count] = '\0';
 	while (count > i)
 	{
-		dst[--count] = (n % 10) + '0';
-		n /= 10;
+		dst[--count] = (num % 10) + '0';
+		num /= 10;
 	}
-	return (dst);
-}
-
-int		ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char		*dst;
-	const int	slen = ft_strlen((char*)s);
-	int			i;
-
-	i = 0;
-	if (!(dst = malloc(sizeof(char) * (slen + 1))))
-		return (NULL);
-	while (s[i])
-	{
-		dst[i] = s[i];
-		i++;
-	}
-	dst[i] = '\0';
 	return (dst);
 }
 
@@ -97,19 +40,16 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	k = 0;
 	if (!s1 || !s2)
 		return (NULL);
-	s1len = ft_strlen((char*)s1);
-	s2len = ft_strlen((char*)s2);
-	if (!(src = malloc((sizeof(char) * (s1len + s2len + 1)))))
+	s1len = ft_strlen((char *) s1);
+	s2len = ft_strlen((char *) s2);
+	src = malloc((sizeof(char) * (s1len + s2len + 1)));
+	if (!(src))
 		return (NULL);
 	while (k < s1len)
 		src[i++] = s1[k++];
 	k = 0;
 	while (k < s2len)
-	{
-		src[i] = s2[k];
-		i++;
-		k++;
-	}
+		src[i++] = s2[k++];
 	src[i] = '\0';
 	return (src);
 }
@@ -121,11 +61,9 @@ void	print3(uint64_t time, uint32_t name, char *str)
 	char	*tmp2;
 
 	string = ft_itoa(time);
-
 	tmp = string;
 	string = ft_strjoin(string, " ms ");
 	free(tmp);
-
 	tmp = string;
 	tmp2 = ft_itoa(name);
 	string = ft_strjoin(string, tmp2);
@@ -177,17 +115,4 @@ bool	print(t_philosopher *philo, enum e_mode type)
 		print2(philo, type, time_now);
 	pthread_mutex_unlock(&(philo->in.use_terminal));
 	return (false);
-}
-
-void	wait_until_death(t_philosopher *philo, enum e_mode type)
-{
-	uint64_t	time;
-
-	if (type == EAT)
-		time = philo->in.time_to_eat;
-	else if (type == SLEEP)
-		time = philo->in.time_to_sleep;
-	if (*philo->someone_died == false)
-		ft_sleep(time, philo);
-	return ;
 }

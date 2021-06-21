@@ -1,4 +1,4 @@
-SRCS			= srcs/main.c srcs/guetters.c srcs/guetters2.c srcs/philosophers.c srcs/routine.c srcs/utils.c srcs/utils2.c srcs/monitoring.c
+SRCS			= srcs/main.c srcs/guetters.c srcs/guetters2.c srcs/philosophers.c srcs/routine.c srcs/utils.c srcs/utils2.c srcs/utils3.c srcs/monitoring.c
 OBJS			= $(SRCS:.c=.o)
 
 CC				= gcc -pthread

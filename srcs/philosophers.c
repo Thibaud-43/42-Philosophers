@@ -62,7 +62,8 @@ int	init_philosophers(uint64_t time_zero, bool *someone_died,
 	return (SUCCESS);
 }
 
-int	create_philosophers2(t_inputs *in, t_philosopher *philo)
+int	create_philosophers2(t_inputs *in, t_philosopher *philo,
+	pthread_mutex_t *forks)
 {
 	uint32_t		i;
 
@@ -78,6 +79,7 @@ int	create_philosophers2(t_inputs *in, t_philosopher *philo)
 	i = 0;
 	while (i < in->number_of_philosophers)
 	{
+		unlock_forks(forks, in->number_of_philosophers);
 		if (pthread_join(philo[i].thread, NULL) != 0)
 			return (PTHREAD_ERROR);
 		i++;
@@ -98,7 +100,7 @@ int	create_philosophers(t_inputs *in)
 		== MALLOC_ERROR || init_forks(in, &forks, &philo)
 		== MALLOC_ERROR)
 		return (MALLOC_ERROR);
-	if (create_philosophers2(in, philo) == PTHREAD_ERROR)
+	if (create_philosophers2(in, philo, forks) == PTHREAD_ERROR)
 		return (PTHREAD_ERROR);
 	destroy_mutex(forks, in, philo);
 	free(philo);
