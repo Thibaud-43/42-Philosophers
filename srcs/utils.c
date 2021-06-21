@@ -13,12 +13,6 @@ char	*ft_itoa(uint64_t num)
 	dst = malloc(sizeof(char) * (count + 1));
 	if (!(dst))
 		return (NULL);
-	if (num < 0)
-	{
-		num *= -1;
-		dst[0] = '-';
-		i++;
-	}
 	dst[count] = '\0';
 	while (count > i)
 	{
