@@ -19,10 +19,10 @@ bool	is_dead(t_philosopher *philo)
 	{
 		pthread_mutex_lock(&philo->eat);
 		(*philo->someone_died) = true;
-		pthread_mutex_lock(&philo->in.use_terminal);
+		pthread_mutex_lock(philo->in.use_terminal);
 		print3((get_time() - philo->time_zero),
 			philo->name, " died\n");
-		pthread_mutex_unlock(&philo->in.use_terminal);
+		pthread_mutex_unlock(philo->in.use_terminal);
 		pthread_mutex_unlock(&philo->eat);
 		return (true);
 	}

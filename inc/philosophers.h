@@ -45,7 +45,7 @@ typedef struct s_inputs
 	uint32_t		number_of_philosophers;
 	uint32_t		number_of_forks;
 	int32_t			number_of_steps;
-	pthread_mutex_t	use_terminal;
+	pthread_mutex_t	*use_terminal;
 }					t_inputs;
 
 typedef struct s_philosopher

@@ -103,6 +103,7 @@ int	create_philosophers(t_inputs *in)
 	if (create_philosophers2(in, philo, forks) == PTHREAD_ERROR)
 		return (PTHREAD_ERROR);
 	destroy_mutex(forks, in, philo);
+	free(in->use_terminal);
 	free(philo);
 	return (SUCCESS);
 }

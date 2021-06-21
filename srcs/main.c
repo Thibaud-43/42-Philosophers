@@ -2,6 +2,9 @@
 
 void	init_inputs(t_inputs *in)
 {
+	pthread_mutex_t	*term;
+
+	term = malloc(sizeof(pthread_mutex_t));
 	in->time_to_die = 0;
 	in->time_to_sleep = 0;
 	in->time_to_eat = 0;
@@ -9,7 +12,8 @@ void	init_inputs(t_inputs *in)
 	in->number_of_philosophers = 0;
 	in->number_of_forks = 0;
 	in->number_of_steps = -1;
-	pthread_mutex_init(&in->use_terminal, NULL);
+	pthread_mutex_init((term), NULL);
+	in->use_terminal = term;
 }
 
 bool	only_numbers(char *str)
