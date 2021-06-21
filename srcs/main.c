@@ -70,7 +70,10 @@ int 	main(int argc, char **argv)
 	if (parse_inputs(argc, argv) == false
 		|| get_inputs(argc, argv, &in) == false)
 	{
-		printf("Error in arguments.\n");
+		if (in.number_of_philosophers < 2)
+			printf("%llu ms 0 is died\n", in.time_to_die);
+		else
+			printf("Error in arguments.\n");
 		return (SUCCESS);
 	}
 	create_philosophers(&in);
