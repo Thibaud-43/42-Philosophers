@@ -73,19 +73,19 @@ void	print3(uint64_t time, uint32_t name, char *str)
 void	print2(t_philosopher *philo, enum e_mode type, uint64_t time_now)
 {
 	if (type == SLEEP)
-		printf("%lu ms %u %s", (time_now - philo->time_zero),
+		print3((time_now - philo->time_zero),
 			philo->name, " is sleeping\n");
 	else if (type == THINK)
-		printf("%lu ms %u %s", (time_now - philo->time_zero),
+		print3((time_now - philo->time_zero),
 			philo->name, " is thinking\n");
 	else if (type == FORK)
-		printf("%lu ms %u %s", (time_now - philo->time_zero),
+		print3((time_now - philo->time_zero),
 			philo->name, " has taken a fork\n");
 	else if (type == DIE)
-		printf("%lu ms %u %s", (time_now - philo->time_zero),
+		print3((time_now - philo->time_zero),
 			philo->name, " is died\n");
 	else if (type == END)
-		printf("%lu ms %u %s", (time_now - philo->time_zero),
+		print3((time_now - philo->time_zero),
 			philo->name, " has eat enought\n");
 }
 
@@ -93,7 +93,7 @@ bool	print(t_philosopher *philo, enum e_mode type)
 {
 	uint64_t	time_now;
 
-	if (*(philo->someone_died) == true)
+	if (stop(philo) == true)
 		return (true);
 	pthread_mutex_lock((philo->in.use_terminal));
 	time_now = get_time();
@@ -101,9 +101,9 @@ bool	print(t_philosopher *philo, enum e_mode type)
 	{
 		pthread_mutex_lock(&philo->eat);
 		philo->time_last_meal = time_now;
-		printf("%lu ms %u %s", (time_now - philo->time_zero),
-			philo->name, " is eating\n");
 		pthread_mutex_unlock(&philo->eat);
+		print3((time_now - philo->time_zero),
+			philo->name, " is eating\n");
 	}
 	else
 		print2(philo, type, time_now);

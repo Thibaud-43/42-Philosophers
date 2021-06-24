@@ -104,6 +104,8 @@ int	create_philosophers(t_inputs *in)
 		return (PTHREAD_ERROR);
 	destroy_mutex(forks, in, philo);
 	free(in->use_terminal);
+	free(in->death);
+	free(in->eat);
 	free(philo);
 	return (SUCCESS);
 }

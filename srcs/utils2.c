@@ -13,6 +13,8 @@ t_inputs *in, t_philosopher *philo)
 		i++;
 	}
 	pthread_mutex_destroy((in->use_terminal));
+	pthread_mutex_destroy((in->death));
+	pthread_mutex_destroy((in->eat));
 	free(forks);
 }
 

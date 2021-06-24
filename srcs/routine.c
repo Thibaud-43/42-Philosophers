@@ -11,7 +11,9 @@ bool	routine_forkmanagement_and_eat(t_philosopher *philo)
 	if (print(philo, EAT))
 		return (true);
 	wait_until_death(philo, EAT);
+	pthread_mutex_lock(philo->in.eat);
 	philo->nb_eat++;
+	pthread_mutex_unlock(philo->in.eat);
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
 	return (false);
@@ -24,7 +26,7 @@ void	*routine(void *arg)
 	philo = (t_philosopher *)arg;
 	if (philo->name % 2 != 0)
 		usleep(1000);
-	while (*(philo->someone_died) == false)
+	while (stop(philo) == false)
 	{
 		if (routine_forkmanagement_and_eat(philo))
 			break ;

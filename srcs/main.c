@@ -3,8 +3,12 @@
 void	init_inputs(t_inputs *in)
 {
 	pthread_mutex_t	*term;
+	pthread_mutex_t	*death;
+	pthread_mutex_t	*eat;
 
 	term = malloc(sizeof(pthread_mutex_t));
+	death = malloc(sizeof(pthread_mutex_t));
+	eat = malloc(sizeof(pthread_mutex_t));
 	in->time_to_die = 0;
 	in->time_to_sleep = 0;
 	in->time_to_eat = 0;
@@ -13,7 +17,11 @@ void	init_inputs(t_inputs *in)
 	in->number_of_forks = 0;
 	in->number_of_steps = -1;
 	pthread_mutex_init((term), NULL);
+	pthread_mutex_init((death), NULL);
+	pthread_mutex_init((eat), NULL);
 	in->use_terminal = term;
+	in->death = death;
+	in->eat = eat;
 }
 
 bool	only_numbers(char *str)
@@ -58,7 +66,7 @@ bool	get_inputs(int argc, char **argv, t_inputs *in)
 	ret = get_max_time_to_think(in);
 	if (argc == 6)
 		ret = get_number_of_steps(argv, in);
-	if (in->number_of_philosophers < 2 || in->number_of_philosophers > 200
+	if (in->number_of_philosophers > 200
 		|| in->time_to_die < 60
 		|| in->time_to_eat < 60 || in->time_to_sleep < 60
 		|| (in->number_of_steps != -1 && in->number_of_steps < 0))
@@ -74,12 +82,13 @@ int 	main(int argc, char **argv)
 	if (parse_inputs(argc, argv) == false
 		|| get_inputs(argc, argv, &in) == false)
 	{
-		if (in.number_of_philosophers < 2)
-			printf("%lu ms 0 is died\n", in.time_to_die);
-		else
-			printf("Error in arguments.\n");
+		printf("Error in arguments.\n");
 		return (SUCCESS);
 	}
-	create_philosophers(&in);
+	if (in.number_of_philosophers < 2)
+		print3((in.time_to_die),
+			0, " is died\n");
+	else
+		create_philosophers(&in);
 	return (SUCCESS);
 }

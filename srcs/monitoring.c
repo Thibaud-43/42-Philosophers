@@ -7,18 +7,20 @@ void	ft_sleep(uint64_t ms, t_philosopher *philo)
 
 	curr = get_time();
 	end = curr + ms;
-	while (get_time() < end && (*philo->someone_died) == false)
+	while (get_time() < end && stop(philo) == false)
 		usleep(100);
 }
 
 bool	is_dead(t_philosopher *philo)
 {
-	if ((*philo->someone_died) == true)
+	if (stop(philo) == true)
 		return (true);
-	if (get_time() - philo->time_last_meal >= philo->in.time_to_die)
+	if (get_time() - use_time_last_meal(philo) >= philo->in.time_to_die)
 	{
 		pthread_mutex_lock(&philo->eat);
+		pthread_mutex_lock(philo->in.death);
 		(*philo->someone_died) = true;
+		pthread_mutex_unlock(philo->in.death);
 		pthread_mutex_lock(philo->in.use_terminal);
 		print3((get_time() - philo->time_zero),
 			philo->name, " died\n");
@@ -35,9 +37,9 @@ bool	check_eat(t_philosopher *philo)
 
 	i = 0;
 	while (i < philo[0].in.number_of_philosophers
-		&& (*philo->someone_died) == false)
+		&& stop(philo) == false)
 	{
-		if (philo[i].nb_eat < philo[i].in.number_of_steps)
+		if (eat_max(philo + i))
 			return (false);
 		i++;
 	}
@@ -50,7 +52,7 @@ bool	check_death(t_philosopher *philo)
 
 	i = 0;
 	while (i < philo[0].in.number_of_philosophers
-		&& (*philo->someone_died) == false)
+		&& stop(philo) == false)
 	{
 		if (is_dead(&philo[i]))
 			return (true);
@@ -61,15 +63,17 @@ bool	check_death(t_philosopher *philo)
 
 void	monitoring(t_inputs *in, t_philosopher *philo)
 {
-	while ((*philo->someone_died) == false)
+	while (stop(philo) == false)
 	{
 		ft_sleep(8, philo);
 		if (check_death(philo))
 			break ;
-		if ((*philo->someone_died) == false && in->number_of_steps > 0
+		if (stop(philo) == false && in->number_of_steps > 0
 			&& check_eat(philo))
 		{
+			pthread_mutex_lock(philo->in.death);
 			(*philo->someone_died) = true;
+			pthread_mutex_unlock(philo->in.death);
 			ft_sleep(5, philo);
 			printf("Everyone ate well\n");
 			break ;

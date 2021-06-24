@@ -46,6 +46,8 @@ typedef struct s_inputs
 	uint32_t		number_of_forks;
 	int32_t			number_of_steps;
 	pthread_mutex_t	*use_terminal;
+	pthread_mutex_t	*death;
+	pthread_mutex_t	*eat;
 }					t_inputs;
 
 typedef struct s_philosopher
@@ -85,4 +87,7 @@ void		ft_sleep(uint64_t ms, t_philosopher *philo);
 void		unlock_forks(pthread_mutex_t *forks, unsigned int nb_philos);
 int			ft_strlen(char *str);
 int			ft_count_size(int n);
+bool		stop(t_philosopher *philo);
+bool		eat_max(t_philosopher *philo);
+uint64_t	use_time_last_meal(t_philosopher *philo);
 #endif
