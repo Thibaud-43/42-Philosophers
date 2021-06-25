@@ -83,11 +83,19 @@ int 	main(int argc, char **argv)
 		|| get_inputs(argc, argv, &in) == false)
 	{
 		printf("Error in arguments.\n");
+		free(in.use_terminal);
+		free(in.eat);
+		free(in.death);
 		return (SUCCESS);
 	}
 	if (in.number_of_philosophers < 2)
+	{
 		print3((in.time_to_die),
 			0, " is died\n");
+		free(in.use_terminal);
+		free(in.eat);
+		free(in.death);
+	}
 	else
 		create_philosophers(&in);
 	return (SUCCESS);
